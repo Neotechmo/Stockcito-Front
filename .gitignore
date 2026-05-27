@@ -1,0 +1,22 @@
+# macOS
+.DS_Store
+
+# Xcode
+DerivedData/
+build/
+
+# User-specific Xcode files
+xcuserdata/
+*.xcuserstate
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# Playground
+timeline.xctimeline
+playground.xcworkspace
+
+# Environment files
+.env
+.env.*
