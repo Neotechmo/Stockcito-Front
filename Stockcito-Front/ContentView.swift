@@ -1,21 +1,18 @@
-//
-//  ContentView.swift
-//  Stockcito-Front
-//
-//  Created by Sergio Ernesto Rosas Ducoing on 05/06/26.
-//
-
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var session = SessionStore()
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        Group {
+            if session.isLoggedIn {
+                MainTabView()
+            } else {
+                LoginView()
+            }
         }
-        .padding()
+        .environmentObject(session)
+        .animation(.easeInOut(duration: 0.35), value: session.isLoggedIn)
     }
 }
 
