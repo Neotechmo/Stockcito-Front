@@ -29,7 +29,7 @@ private class ProductFormViewModel {
         if selectedCategoryId == nil { selectedCategoryId = categories.first?.id }
     }
 
-    func save(productId: Int64?) async throws {
+    func save(productId: Int64?) async throws -> Product {
         guard !name.trimmingCharacters(in: .whitespaces).isEmpty else {
             throw APIError.serverError("El nombre es obligatorio.")
         }
@@ -46,19 +46,32 @@ private class ProductFormViewModel {
             unitPrice: Double(unitPrice), barcode: barcode.isEmpty ? nil : barcode
         )
         if let id = productId {
-            let _: Product = try await APIClient.shared.putJSON("v1/products/\(id)", body: input)
+            return try await APIClient.shared.putJSON("v1/products/\(id)", body: input)
         } else {
-            let _: Product = try await APIClient.shared.postJSON("v1/products", body: input)
+            return try await APIClient.shared.postJSON("v1/products", body: input)
         }
     }
 }
 
 struct ProductFormView: View {
     let product: Product?
-    let onSave: () async -> Void
+    let initialName: String?
+    let onSave: (Product) async -> Void
 
     @State private var vm = ProductFormViewModel()
     @Environment(\.dismiss) private var dismiss
+
+    init(product: Product?, initialName: String? = nil, onSave: @escaping () async -> Void) {
+        self.product = product
+        self.initialName = initialName
+        self.onSave = { _ in await onSave() }
+    }
+
+    init(product: Product?, initialName: String? = nil, onSavedProduct: @escaping (Product) async -> Void) {
+        self.product = product
+        self.initialName = initialName
+        self.onSave = onSavedProduct
+    }
 
     var body: some View {
         NavigationStack {
@@ -153,8 +166,8 @@ struct ProductFormView: View {
                             vm.isLoading = true
                             defer { vm.isLoading = false }
                             do {
-                                try await vm.save(productId: product?.id)
-                                await onSave(); dismiss()
+                                let saved = try await vm.save(productId: product?.id)
+                                await onSave(saved); dismiss()
                             } catch { vm.error = error.localizedDescription }
                         }
                     }
@@ -162,7 +175,14 @@ struct ProductFormView: View {
                     .foregroundStyle(Color.stockLight)
                 }
             }
-            .task { await vm.loadCatalogs(); if let p = product { vm.populate(from: p) } }
+            .task {
+                await vm.loadCatalogs()
+                if let p = product {
+                    vm.populate(from: p)
+                } else if let initialName, vm.name.isEmpty {
+                    vm.name = initialName
+                }
+            }
             .errorAlert(error: Binding(get: { vm.error }, set: { vm.error = $0 }))
         }
     }

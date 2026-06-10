@@ -24,7 +24,7 @@ class APIClient {
 
     var baseURL: String {
         UserDefaults.standard.string(forKey: "api_base_url")
-            ?? "https://api.neotechmo.top/Stockcito/api"
+            ?? "https://api.neotechmo.top/Stockcito/api" 
     }
 
     var token: String? {

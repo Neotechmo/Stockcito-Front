@@ -206,6 +206,32 @@ struct ImportJob: Codable, Identifiable {
     let items: [ImportItem]?
 }
 
+struct ImportPreviewRequest: Encodable {
+    let userId: Int64
+    let sourceType: String
+    let sourceFilename: String?
+    let fileHash: String?
+    let rawText: String?
+    let aiModel: String?
+    let notes: String?
+    let items: [ImportItemRequest]
+}
+
+struct ImportItemRequest: Encodable, Identifiable {
+    var id: String { rawLine }
+
+    let productId: Int64?
+    let productName: String
+    let movementType: String
+    let quantity: Double
+    let unitOfMeasure: String
+    let confidence: Double
+    let rawLine: String
+    let status: String
+}
+
+typealias ImportPreviewResponse = ImportJob
+
 struct ImportJobInput: Encodable {
     let userId: Int64
     let sourceType: String
