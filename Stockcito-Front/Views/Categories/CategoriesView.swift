@@ -32,9 +32,9 @@ struct CategoriesView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                LazyVStack(spacing: 10) {
-                    ForEach(vm.categories) { cat in
+            List {
+                ForEach(vm.categories) { cat in
+                    Button { editItem = cat } label: {
                         HStack(spacing: 14) {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 10)
@@ -50,18 +50,26 @@ struct CategoriesView: View {
                             Spacer()
                             Image(systemName: "chevron.right").font(.caption).foregroundStyle(Color.stockMuted)
                         }
-                        .padding(14)
-                        .background(Color.stockCard)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
-                        .contextMenu {
-                            Button { editItem = cat } label: { Label("Editar", systemImage: "pencil") }
-                            Button(role: .destructive) { Task { await vm.delete(cat) } } label: { Label("Eliminar", systemImage: "trash") }
+                        .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .listRowBackground(Color.stockCard)
+                    .listRowSeparatorTint(Color.stockElevated)
+                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                        Button(role: .destructive) {
+                            Task { await vm.delete(cat) }
+                        } label: {
+                            Label("Eliminar", systemImage: "trash")
                         }
+                        Button { editItem = cat } label: {
+                            Label("Editar", systemImage: "pencil")
+                        }
+                        .tint(.indigo)
                     }
                 }
-                .padding(.horizontal)
-                .padding(.top, 16)
             }
+            .listStyle(.insetGrouped)
+            .scrollContentBackground(.hidden)
             .stockBackground()
             .navigationTitle("Categorías")
             .toolbarColorScheme(.dark, for: .navigationBar)
@@ -127,6 +135,7 @@ private struct CategoryFormSheet: View {
             }
             .onAppear { name = category?.name ?? ""; description = category?.description ?? "" }
             .errorAlert(error: Binding(get: { error }, set: { error = $0 }))
+            .doneKeyboardToolbar()
         }
     }
 }

@@ -14,6 +14,7 @@ private let tabItems: [TabItem] = [
     TabItem(icon: "cart",                       selectedIcon: "cart.fill",                       label: "Solicitudes"),
     TabItem(icon: "building.2",                 selectedIcon: "building.2.fill",                 label: "Proveedores"),
     TabItem(icon: "doc.text.viewfinder",        selectedIcon: "doc.text.viewfinder",             label: "Importar"),
+    TabItem(icon: "tag",                        selectedIcon: "tag.fill",                        label: "Categorías"),
 ]
 
 // MARK: - MainTabView
@@ -30,7 +31,8 @@ struct MainTabView: View {
                 case 2: MovementsView()
                 case 3: PurchaseRequestsView()
                 case 4: SuppliersView()
-                default: ImportsView()
+                case 5: ImportsView()
+                default: CategoriesView()
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)

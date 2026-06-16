@@ -13,6 +13,7 @@ struct ContentView: View {
         }
         .environmentObject(session)
         .animation(.easeInOut(duration: 0.35), value: session.isLoggedIn)
+        .doneKeyboardToolbar()
     }
 }
 
