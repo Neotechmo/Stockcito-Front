@@ -166,27 +166,3 @@ extension String {
         self == "ENTRY" ? .green : .red
     }
 }
-
-// MARK: - Keyboard dismissal
-
-extension UIApplication {
-    func hideKeyboard() {
-        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
-}
-
-extension View {
-    /// Añade un botón "Listo" sobre el teclado en todos los TextFields del árbol de vistas.
-    func doneKeyboardToolbar() -> some View {
-        toolbar {
-            ToolbarItemGroup(placement: .keyboard) {
-                Spacer()
-                Button("Listo") {
-                    UIApplication.shared.hideKeyboard()
-                }
-                .fontWeight(.semibold)
-                .foregroundStyle(Color.stockLight)
-            }
-        }
-    }
-}

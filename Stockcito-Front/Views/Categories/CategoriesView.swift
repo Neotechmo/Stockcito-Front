@@ -136,7 +136,6 @@ private struct CategoryFormSheet: View {
             }
             .onAppear { name = category?.name ?? ""; description = category?.description ?? "" }
             .errorAlert(error: Binding(get: { error }, set: { error = $0 }))
-            .doneKeyboardToolbar()
         }
     }
 }

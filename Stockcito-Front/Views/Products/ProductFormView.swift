@@ -184,7 +184,6 @@ struct ProductFormView: View {
                 }
             }
             .errorAlert(error: Binding(get: { vm.error }, set: { vm.error = $0 }))
-            .doneKeyboardToolbar()
         }
     }
 }
