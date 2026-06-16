@@ -139,6 +139,7 @@ struct ProductsView: View {
                 .padding(.top, 16)
                 .padding(.bottom, 8)
             }
+            .scrollDismissesKeyboard(.immediately)
             .stockBackground()
             .navigationTitle("Productos")
             .toolbarColorScheme(.dark, for: .navigationBar)

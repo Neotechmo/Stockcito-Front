@@ -99,6 +99,21 @@ extension View {
             Text(error.wrappedValue ?? "")
         }
     }
+
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+
+    func keyboardDoneToolbar() -> some View {
+        toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                Spacer()
+                Button("Listo") { hideKeyboard() }
+                    .fontWeight(.semibold)
+                    .foregroundStyle(Color.stockLight)
+            }
+        }
+    }
 }
 
 // MARK: - Number formatting

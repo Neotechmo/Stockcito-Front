@@ -114,6 +114,7 @@ private struct CategoryFormSheet: View {
                 }
                 .padding(.top, 16)
             }
+            .scrollDismissesKeyboard(.immediately)
             .stockBackground()
             .navigationTitle(category == nil ? "Nueva categoría" : "Editar categoría")
             .navigationBarTitleDisplayMode(.inline)

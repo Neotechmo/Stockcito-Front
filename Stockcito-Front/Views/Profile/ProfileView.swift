@@ -223,6 +223,7 @@ private struct EditProfileSheet: View {
                 }
                 .padding(.top, 8).padding(.bottom, 8)
             }
+            .scrollDismissesKeyboard(.immediately)
             .stockBackground()
             .navigationTitle("Editar perfil")
             .navigationBarTitleDisplayMode(.inline)

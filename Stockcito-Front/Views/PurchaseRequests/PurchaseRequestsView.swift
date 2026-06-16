@@ -385,6 +385,8 @@ private struct PurchaseRequestEditSheet: View {
                 }
                 .padding(.top, 16).padding(.bottom, 8)
             }
+            .scrollDismissesKeyboard(.immediately)
+            .keyboardDoneToolbar()
             .stockBackground()
             .navigationTitle("Editar solicitud")
             .navigationBarTitleDisplayMode(.inline)
@@ -495,6 +497,8 @@ private struct PurchaseRequestFormSheet: View {
                 }
                 .padding(.top, 16).padding(.bottom, 8)
             }
+            .scrollDismissesKeyboard(.immediately)
+            .keyboardDoneToolbar()
             .stockBackground()
             .navigationTitle("Nueva solicitud")
             .navigationBarTitleDisplayMode(.inline)

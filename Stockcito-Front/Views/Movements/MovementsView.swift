@@ -78,6 +78,7 @@ struct MovementsView: View {
                 }
                 .padding(.top, 16).padding(.bottom, 8)
             }
+            .scrollDismissesKeyboard(.immediately)
             .stockBackground()
             .navigationTitle("Movimientos")
             .toolbarColorScheme(.dark, for: .navigationBar)
@@ -210,6 +211,8 @@ private struct MovementFormSheet: View {
                 }
                 .padding(.top, 16).padding(.bottom, 8)
             }
+            .scrollDismissesKeyboard(.immediately)
+            .keyboardDoneToolbar()
             .stockBackground()
             .navigationTitle("Nuevo movimiento")
             .navigationBarTitleDisplayMode(.inline)

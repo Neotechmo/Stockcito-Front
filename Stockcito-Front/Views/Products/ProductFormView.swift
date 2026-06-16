@@ -152,6 +152,8 @@ struct ProductFormView: View {
                 }
                 .padding(.top, 16).padding(.bottom, 8)
             }
+            .scrollDismissesKeyboard(.immediately)
+            .keyboardDoneToolbar()
             .stockBackground()
             .navigationTitle(product == nil ? "Nuevo producto" : "Editar producto")
             .navigationBarTitleDisplayMode(.inline)

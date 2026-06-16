@@ -114,6 +114,7 @@ struct LoginView: View {
                         .padding(.bottom, 40)
                     }
                 }
+                .scrollDismissesKeyboard(.immediately)
             }
             .navigationDestination(isPresented: $goToRegister) {
                 RegisterView()

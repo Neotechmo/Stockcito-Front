@@ -93,6 +93,7 @@ struct SuppliersView: View {
                 }
                 .padding(.top, 16).padding(.bottom, 8)
             }
+            .scrollDismissesKeyboard(.immediately)
             .stockBackground()
             .navigationTitle("Proveedores")
             .toolbarColorScheme(.dark, for: .navigationBar)
@@ -323,6 +324,8 @@ private struct SupplierFormSheet: View {
                 }
                 .padding(.top, 16)
             }
+            .scrollDismissesKeyboard(.immediately)
+            .keyboardDoneToolbar()
             .stockBackground()
             .navigationTitle(supplier == nil ? "Nuevo proveedor" : "Editar proveedor")
             .navigationBarTitleDisplayMode(.inline)

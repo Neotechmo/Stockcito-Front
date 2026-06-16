@@ -82,6 +82,7 @@ struct RegisterView: View {
                     .padding(.bottom, 40)
                 }
             }
+            .scrollDismissesKeyboard(.immediately)
         }
         .navigationTitle("Registro")
         .navigationBarTitleDisplayMode(.inline)

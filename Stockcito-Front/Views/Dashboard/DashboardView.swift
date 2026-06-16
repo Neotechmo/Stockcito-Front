@@ -111,6 +111,7 @@ struct DashboardView: View {
                 }
                 .padding(.top, 16).padding(.bottom, 8)
             }
+            .scrollDismissesKeyboard(.immediately)
             .stockBackground()
             .refreshable { await vm.load() }
             .task { await vm.load() }
