@@ -88,6 +88,7 @@ struct CategoriesView: View {
             .sheet(isPresented: $showForm) { CategoryFormSheet(category: nil, vm: vm) }
             .sheet(item: $editItem) { cat in CategoryFormSheet(category: cat, vm: vm) }
             .errorAlert(error: Binding(get: { vm.error }, set: { vm.error = $0 }))
+            .floatingTabBarPadding()
         }
     }
 }

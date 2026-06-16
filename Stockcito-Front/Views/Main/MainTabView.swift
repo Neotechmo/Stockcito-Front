@@ -36,8 +36,6 @@ struct MainTabView: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            // Espacio para que el contenido no quede detrás del tab bar
-            .safeAreaInset(edge: .bottom) { Color.clear.frame(height: 80) }
 
             // Tab bar flotante
             FloatingTabBar(selectedTab: $selectedTab)

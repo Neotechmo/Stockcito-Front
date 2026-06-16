@@ -64,6 +64,11 @@ extension View {
     func stockCard(padding: CGFloat = 16) -> some View { modifier(StockCard(padding: padding)) }
     func stockBackground() -> some View { background(Color.stockBase.ignoresSafeArea()) }
 
+    /// Añade espacio en la parte inferior para que el contenido no quede oculto detrás del tab bar flotante.
+    func floatingTabBarPadding() -> some View {
+        self.safeAreaInset(edge: .bottom) { Color.clear.frame(height: 50) }
+    }
+
     /// Campo de texto oscuro con la paleta
     func stockField() -> some View {
         self

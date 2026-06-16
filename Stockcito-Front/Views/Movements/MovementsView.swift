@@ -99,6 +99,7 @@ struct MovementsView: View {
                 ProfileView().environmentObject(session)
             }
             .errorAlert(error: Binding(get: { vm.error }, set: { vm.error = $0 }))
+            .floatingTabBarPadding()
         }
     }
 }
